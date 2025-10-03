@@ -1,150 +1,196 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { 
-  Menu, 
-  X, 
-  Sparkles, 
-  ChevronDown,
-  Zap,
-  BarChart3,
-  Users,
-  Shield
-} from "lucide-react";
+import { Menu, X, Globe, User, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface NavbarProps {
-  onGetStarted: () => void;
-  onSignIn: () => void;
+  onGetStarted?: () => void;
+  onSignIn?: () => void;
 }
 
 export const Navbar = ({ onGetStarted, onSignIn }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const { user, isSignedIn, signOut } = useAuth();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   const navItems = [
-    {
-      name: "Features",
-      href: "#features",
-      dropdown: [
-        { name: "AI Analysis", href: "#ai-analysis", icon: Zap },
-        { name: "Performance Tracking", href: "#tracking", icon: BarChart3 },
-        { name: "Team Collaboration", href: "#team", icon: Users },
-        { name: "Security", href: "#security", icon: Shield },
-      ]
-    },
-    { name: "Pricing", href: "#pricing" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
+    { name: t("features"), href: "/#features" },
+    { name: t("about"), href: "/#about" },
+    { name: t("careers"), href: "/careers" },
+    { name: t("pricing"), href: "/#pricing" },
+    { name: t("contact"), href: "/contact" },
   ];
 
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "tr" : "en";
+    i18n.changeLanguage(newLang);
+  };
+
+  const isActive = (href: string) => {
+    if (href === "/") return location.pathname === "/";
+    if (href.startsWith("#")) {
+      return location.pathname === "/" && location.hash === href;
+    }
+    if (href.includes("/#")) {
+      const [path, hash] = href.split("#");
+      return location.pathname === path && location.hash === `#${hash}`;
+    }
+    return location.pathname === href;
+  };
+
+  const handleNavClick = (href: string) => {
+    closeMobileMenu();
+
+    if (href.startsWith("#")) {
+      if (location.pathname !== "/") {
+        navigate("/", { state: { scrollTo: href.substring(1) } });
+      } else {
+        setTimeout(() => {
+          const el = document.getElementById(href.substring(1));
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+    } else if (href.includes("/#")) {
+      const [path, hash] = href.split("#");
+      if (location.pathname !== path) {
+        navigate(path, { state: { scrollTo: hash } });
+      } else {
+        setTimeout(() => {
+          const el = document.getElementById(hash);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+    } else {
+      navigate(href);
+    }
+  };
+
   return (
-    <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled 
-        ? "glass-effect shadow-lg py-2" 
-        : "bg-transparent py-4"
-    )}>
+    <nav
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        isScrolled ? "backdrop-blur-xl bg-black/60 shadow-lg py-2" : "bg-transparent py-4"
+      )}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
-            <div className="relative">
-              <div className="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center group-hover:animate-glow transition-all duration-300">
-                <Sparkles className="w-6 h-6 text-white" />
-              </div>
-              <div className="absolute inset-0 gradient-primary rounded-xl blur-lg opacity-30 group-hover:opacity-60 transition-opacity duration-300"></div>
-            </div>
-            <span className="text-2xl font-bold text-gradient">Salesence</span>
+          {/* Logo - Fixed visibility */}
+          <Link to="/" className="relative group">
+            <span className="absolute inset-0 blur-2xl opacity-40 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-lg animate-pulse"></span>
+            <span className="relative text-3xl font-extrabold text-white bg-clip-text hover:scale-110 transition-transform duration-500">
+              Salesence
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
-              <div key={item.name} className="relative group">
-                {item.dropdown ? (
-                  <div
-                    className="relative"
-                    onMouseEnter={() => setActiveDropdown(item.name)}
-                    onMouseLeave={() => setActiveDropdown(null)}
-                  >
-                    <button className="flex items-center space-x-1 text-gray-300 hover:text-white transition-colors duration-200 py-2">
-                      <span>{item.name}</span>
-                      <ChevronDown className="w-4 h-4" />
-                    </button>
-                    
-                    {activeDropdown === item.name && (
-                      <div className="absolute top-full left-0 mt-2 w-64 glass-effect rounded-xl shadow-xl border border-white/10 py-2 animate-in fade-in-0 zoom-in-95 duration-200">
-                        {item.dropdown.map((dropdownItem) => (
-                          <a
-                            key={dropdownItem.name}
-                            href={dropdownItem.href}
-                            className="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 transition-colors duration-200"
-                          >
-                            <dropdownItem.icon className="w-5 h-5 text-purple-400" />
-                            <span>{dropdownItem.name}</span>
-                          </a>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <a
-                    href={item.href}
-                    className="text-gray-300 hover:text-white transition-colors duration-200 relative group"
-                  >
-                    {item.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-indigo-400 transition-all duration-300 group-hover:w-full"></span>
-                  </a>
+              <button
+                key={item.name}
+                onClick={() => handleNavClick(item.href)}
+                className={cn(
+                  "relative transition-all duration-300 group py-2 text-lg",
+                  isActive(item.href) ? "text-white font-semibold" : "text-gray-300 hover:text-white"
                 )}
-              </div>
+              >
+                {item.name}
+                <span
+                  className={cn(
+                    "absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-full transition-all duration-500",
+                    isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"
+                  )}
+                ></span>
+              </button>
             ))}
           </div>
 
-          {/* Desktop CTA Buttons */}
+          {/* Desktop CTA */}
           <div className="hidden lg:flex items-center space-x-4">
             <Button
+              onClick={toggleLanguage}
               variant="ghost"
-              onClick={onSignIn}
-              className="text-gray-300 hover:text-white hover:bg-white/10"
+              className="text-gray-300 hover:text-white hover:bg-white/10 flex items-center space-x-2"
             >
-              Sign In
+              <Globe className="w-4 h-4" />
+              <span>{i18n.language === "en" ? "TR" : "EN"}</span>
             </Button>
-            <Button
-              onClick={onGetStarted}
-              className="gradient-primary hover:opacity-90 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105 glow-effect"
-            >
-              Get Started
-            </Button>
+
+            {isSignedIn ? (
+              // Signed in state
+              <>
+                <Link to="/profile">
+                  <Button variant="ghost" className="text-gray-300 hover:text-white hover:bg-white/10 flex items-center space-x-2">
+                    <User className="w-4 h-4" />
+                    <span>{t("profile")}</span>
+                  </Button>
+                </Link>
+                <Button
+                  onClick={signOut}
+                  variant="ghost"
+                  className="text-gray-300 hover:text-white hover:bg-white/10 flex items-center space-x-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>{t("signOut")}</span>
+                </Button>
+              </>
+            ) : (
+              // Signed out state
+              <>
+                <Link to="/login">
+                  <Button variant="ghost" className="text-gray-300 hover:text-white hover:bg-white/10">
+                    {t("signIn")}
+                  </Button>
+                </Link>
+                <Link to="/signup">
+                  <Button className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:opacity-90 text-white px-6 py-2 rounded-xl font-semibold shadow-lg hover:scale-105 transition-all duration-300">
+                    {t("getStarted")}
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center space-x-4">
+          <div className="lg:hidden flex items-center space-x-2">
             <Button
+              onClick={toggleLanguage}
               variant="ghost"
-              onClick={onSignIn}
-              className="text-gray-300 hover:text-white text-sm px-3"
+              size="sm"
+              className="text-gray-300 hover:text-white flex items-center space-x-1 px-2"
             >
-              Sign In
+              <Globe className="w-4 h-4" />
+              <span className="text-xs">{i18n.language === "en" ? "TR" : "EN"}</span>
             </Button>
+
+            {isSignedIn ? (
+              <Link to="/profile">
+                <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white px-2">
+                  <User className="w-4 h-4" />
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <Button variant="ghost" className="text-gray-300 hover:text-white text-sm px-3">
+                  {t("signIn")}
+                </Button>
+              </Link>
+            )}
+
             <Button
               onClick={toggleMobileMenu}
               variant="ghost"
@@ -158,49 +204,48 @@ export const Navbar = ({ onGetStarted, onSignIn }: NavbarProps) => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden mt-4 glass-effect rounded-xl border border-white/10 overflow-hidden animate-in slide-in-from-top-5 duration-300">
-            <div className="px-4 py-6 space-y-4">
-              {navItems.map((item) => (
-                <div key={item.name}>
-                  {item.dropdown ? (
-                    <div className="space-y-2">
-                      <div className="text-white font-medium">{item.name}</div>
-                      <div className="pl-4 space-y-2">
-                        {item.dropdown.map((dropdownItem) => (
-                          <a
-                            key={dropdownItem.name}
-                            href={dropdownItem.href}
-                            onClick={closeMobileMenu}
-                            className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-200 py-2"
-                          >
-                            <dropdownItem.icon className="w-4 h-4 text-purple-400" />
-                            <span>{dropdownItem.name}</span>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  ) : (
-                    <a
-                      href={item.href}
-                      onClick={closeMobileMenu}
-                      className="block text-gray-300 hover:text-white transition-colors duration-200 py-2"
-                    >
-                      {item.name}
-                    </a>
+          <div className="fixed inset-0 bg-black/90 backdrop-blur-xl p-6 animate-in fade-in duration-300 z-40">
+            <div className="flex flex-col space-y-6 text-white text-lg font-medium">
+              {navItems.map((item, i) => (
+                <button
+                  key={item.name}
+                  onClick={() => handleNavClick(item.href)}
+                  className={cn(
+                    "block transition-colors duration-200 py-2 w-full text-left",
+                    isActive(item.href) ? "text-purple-300 font-semibold" : "text-gray-300 hover:text-purple-300"
                   )}
-                </div>
-              ))}
-              
-              <div className="pt-4 border-t border-white/10">
-                <Button
-                  onClick={() => {
-                    onGetStarted();
-                    closeMobileMenu();
-                  }}
-                  className="w-full gradient-primary hover:opacity-90 text-white py-3 rounded-lg font-medium"
+                  style={{ animationDelay: `${i * 80}ms` }}
                 >
-                  Get Started
-                </Button>
+                  {item.name}
+                </button>
+              ))}
+              <div className="pt-6 border-t border-white/20 space-y-3">
+                {isSignedIn ? (
+                  <>
+                    <Link to="/profile" onClick={closeMobileMenu}>
+                      <Button className="w-full bg-gray-800 hover:bg-gray-700 text-white py-3 rounded-xl font-semibold flex items-center justify-center space-x-2">
+                        <User className="w-4 h-4" />
+                        <span>{t("profile")}</span>
+                      </Button>
+                    </Link>
+                    <Button
+                      onClick={() => {
+                        signOut();
+                        closeMobileMenu();
+                      }}
+                      className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl font-semibold flex items-center justify-center space-x-2"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>{t("signOut")}</span>
+                    </Button>
+                  </>
+                ) : (
+                  <Link to="/signup" onClick={closeMobileMenu}>
+                    <Button className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:opacity-90 text-white py-3 rounded-xl font-semibold shadow-md hover:scale-105 transition-all">
+                      {t("getStarted")}
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -208,4 +253,4 @@ export const Navbar = ({ onGetStarted, onSignIn }: NavbarProps) => {
       </div>
     </nav>
   );
-};
+}; 

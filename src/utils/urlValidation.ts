@@ -1,7 +1,7 @@
 
-export const validateProductUrl = (url: string): { isValid: boolean; error?: string } => {
+export const validateProductUrl = (url: string): { isValid: boolean; errorKey?: string } => {
   if (!url.trim()) {
-    return { isValid: false, error: "Please enter a product URL" };
+    return { isValid: false, errorKey: "enterProductUrl" };
   }
 
   try {
@@ -9,7 +9,7 @@ export const validateProductUrl = (url: string): { isValid: boolean; error?: str
     new URL(url);
     return { isValid: true };
   } catch {
-    return { isValid: false, error: "Please enter a valid URL" };
+    return { isValid: false, errorKey: "enterValidUrl" };
   }
 };
 

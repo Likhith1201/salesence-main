@@ -2,12 +2,17 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Search, Package, ExternalLink, AlertCircle, Sparkles, TrendingUp } from "lucide-react";
+import { Search, Package, ExternalLink, AlertCircle, Sparkles, TrendingUp, ArrowLeft } from "lucide-react";
 import { validateProductUrl, extractProductInfo } from "@/utils/urlValidation";
 import { generateMockAnalysis, MockAnalysisResult } from "@/utils/mockDataGenerator";
 import { AnalysisResults } from "@/components/analysis/AnalysisResults";
+import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const DemoSection = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [url, setUrl] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [validationError, setValidationError] = useState("");
@@ -18,7 +23,7 @@ export const DemoSection = () => {
     
     const validation = validateProductUrl(url);
     if (!validation.isValid) {
-      setValidationError(validation.error || "Invalid URL");
+      setValidationError(t(validation.errorKey || 'enterValidUrl'));
       return;
     }
     
@@ -55,21 +60,34 @@ export const DemoSection = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Back Button - Only show on dedicated demo page */}
+        {location.pathname === "/demo" && (
+          <div className="mb-8">
+            <Button
+              onClick={() => navigate("/")}
+              variant="ghost"
+              className="text-gray-300 hover:text-white hover:bg-white/10 flex items-center gap-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              {t("backToHomepage")}
+            </Button>
+          </div>
+        )}
+
         <div className="max-w-4xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-12">
             <div className="inline-flex items-center glass-effect rounded-full px-6 py-3 mb-6">
               <Sparkles className="w-5 h-5 text-purple-400 mr-2 animate-pulse" />
-              <span className="text-sm font-medium text-gray-300">Try It Free</span>
+              <span className="text-sm font-medium text-gray-300">{t("tryItFree")}</span>
             </div>
             
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-              See the magic in action
+              {t("seeTheMagic")}
             </h2>
             
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Paste any product URL and watch our AI analyze it in real-time. 
-              No signup required for your first analysis.
+              {t("pasteAnyProductUrl")}
             </p>
           </div>
 
@@ -84,7 +102,7 @@ export const DemoSection = () => {
                   
                   <Input
                     type="url"
-                    placeholder="https://amazon.com/product/... or any marketplace URL"
+                    placeholder={t("urlPlaceholder")}
                     value={url}
                     onChange={handleInputChange}
                     className={`h-16 pl-12 pr-4 text-lg bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:border-purple-400 focus:ring-purple-400/20 ${
@@ -113,7 +131,7 @@ export const DemoSection = () => {
                   ) : (
                     <>
                       <Search className="mr-3 h-6 w-6" />
-                      Analyze Free
+                      {t("analyzeFree")}
                     </>
                   )}
                 </Button>
@@ -128,15 +146,15 @@ export const DemoSection = () => {
                 <div className="flex items-center justify-center space-x-6 text-sm text-gray-400">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                    <span>Free analysis</span>
+                    <span>{t("freeAnalysis")}</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-                    <span>No signup required</span>
+                    <span>{t("noSignupRequired")}</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-                    <span>Instant results</span>
+                    <span>{t("instantResults")}</span>
                   </div>
                 </div>
               </div>
@@ -168,14 +186,14 @@ export const DemoSection = () => {
                   <Package className="h-10 w-10 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3">
-                  Ready to analyze your first product?
+                  {t("readyToAnalyze")}
                 </h3>
                 <p className="text-gray-300 mb-6">
-                  Paste any product URL above to get started with your free analysis.
+                  {t("pasteProductUrl")}
                 </p>
                 <div className="flex items-center justify-center space-x-4 text-sm text-gray-400">
                   <TrendingUp className="w-4 h-4" />
-                  <span>Boost sales by up to 35%</span>
+                  <span>{t("boostSales")}</span>
                 </div>
               </div>
             </div>

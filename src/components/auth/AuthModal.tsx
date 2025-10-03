@@ -1,12 +1,17 @@
-
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
-import { Eye, EyeOff, Mail, Lock, User, Chrome, Apple } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { Chrome, Apple, Eye, EyeOff } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -15,179 +20,228 @@ interface AuthModalProps {
   onModeChange: (mode: 'login' | 'signup') => void;
 }
 
-export const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
+  const { t } = useTranslation();
+  const [tab, setTab] = useState<"login" | "signup">("login");
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    name: ''
+    name: "",
+    email: "",
+    password: "",
   });
-  const { toast } = useToast();
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      toast({
-        title: mode === 'signup' ? "Account created!" : "Welcome back!",
-        description: mode === 'signup' 
-          ? "Your account has been created successfully." 
-          : "You've been signed in successfully.",
-      });
-      onClose();
-    }, 2000);
+    console.log(tab === "login" ? "Logging in..." : "Signing up...", formData);
+    onClose();
   };
 
   const handleOAuthLogin = (provider: string) => {
-    console.log(`${mode} with ${provider}`);
-    toast({
-      title: "Coming soon",
-      description: `${provider} authentication will be available soon.`,
-    });
+    console.log(`${provider} login clicked`);
+    onClose();
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md max-w-[95vw] bg-brilliance border-diamond-cut mx-4 sm:mx-auto">
-        <DialogHeader>
-          <DialogTitle className="text-center text-xl sm:text-2xl font-bold text-wall-street">
-            {mode === 'signup' ? 'Create your account' : 'Welcome back'}
-          </DialogTitle>
-        </DialogHeader>
-        
-        <div className="space-y-4 sm:space-y-6">
-          {/* OAuth Buttons */}
-          <div className="grid grid-cols-2 gap-2 sm:gap-3">
-            <Button
-              variant="outline"
-              className="w-full h-11 sm:h-12 border-little-dipper hover:bg-lavender-blue/50 text-sm"
-              onClick={() => handleOAuthLogin('Google')}
-            >
-              <Chrome className="mr-1 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-              <span className="hidden sm:inline">Google</span>
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full h-11 sm:h-12 border-little-dipper hover:bg-lavender-blue/50 text-sm"
-              onClick={() => handleOAuthLogin('Apple')}
-            >
-              <Apple className="mr-1 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-              <span className="hidden sm:inline">Apple</span>
-            </Button>
-          </div>
-          
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <Separator className="w-full bg-little-dipper" />
+      <DialogContent className="relative w-full max-w-md rounded-3xl overflow-hidden border border-gray-800 p-8 shadow-2xl bg-gray-950/80 backdrop-blur-xl">
+        {/* Gradient blobs background */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <div className="absolute w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply blur-3xl opacity-20 -top-10 -left-10 animate-pulse" />
+          <div className="absolute w-64 h-64 bg-pink-500 rounded-full mix-blend-multiply blur-3xl opacity-20 top-10 -right-10 animate-pulse delay-1000" />
+          <div className="absolute w-64 h-64 bg-cyan-500 rounded-full mix-blend-multiply blur-3xl opacity-20 bottom-10 left-10 animate-pulse delay-2000" />
+        </div>
+
+        <div className="relative z-10">
+          <DialogHeader>
+            <DialogTitle className="text-center text-3xl font-bold text-white mb-2">
+              {tab === "login" ? t("welcomeBack") : t("createYourAccount")}
+            </DialogTitle>
+            <p className="text-center text-gray-400 text-sm">
+              {tab === "login"
+                ? t("signInToContinueJourney")
+                : t("joinUnlockPotential")}
+            </p>
+          </DialogHeader>
+
+          {/* Tabs for Login/Signup */}
+          <Tabs
+            value={tab}
+            onValueChange={(val) => setTab(val as "login" | "signup")}
+            className="mt-6"
+          >
+            <TabsList className="grid grid-cols-2 mb-6 rounded-xl bg-gray-900 p-1">
+              <TabsTrigger
+                value="login"
+                className="rounded-lg text-gray-300 data-[state=active]:bg-purple-600 data-[state=active]:text-white"
+              >
+                {t("login")}
+              </TabsTrigger>
+              <TabsTrigger
+                value="signup"
+                className="rounded-lg text-gray-300 data-[state=active]:bg-purple-600 data-[state=active]:text-white"
+              >
+                {t("signup")}
+              </TabsTrigger>
+            </TabsList>
+
+            {/* OAuth Buttons */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full h-12 rounded-xl gap-2 font-semibold text-gray-200 border-gray-700 bg-gray-900/50 hover:bg-gray-800"
+                onClick={() => handleOAuthLogin("Google")}
+              >
+                <Chrome className="h-5 w-5 text-gray-400" />
+                {t("continueWithGoogle")}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full h-12 rounded-xl gap-2 font-semibold text-gray-200 border-gray-700 bg-gray-900/50 hover:bg-gray-800"
+                onClick={() => handleOAuthLogin("Apple")}
+              >
+                <Apple className="h-5 w-5 text-gray-400" />
+                {t("continueWithApple")}
+              </Button>
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-brilliance px-2 text-buffed-plum">Or continue with email</span>
+
+            <div className="relative mb-6">
+              <div className="absolute inset-0 flex items-center">
+                <Separator className="w-full bg-gray-800" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-gray-950/80 px-2 text-gray-500">
+                  {t("orContinueWithEmail")}
+                </span>
+              </div>
             </div>
-          </div>
-          
-          {/* Email Form */}
-          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-            {mode === 'signup' && (
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-wall-street font-medium text-sm">
-                  Full Name
-                </Label>
-                <div className="relative">
+
+            {/* Login Form */}
+            <TabsContent value="login">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <Label htmlFor="email" className="text-gray-300">
+                    {t("email")}
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="bg-gray-900/50 border-gray-700 text-white placeholder-gray-500"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="password" className="text-gray-300">
+                    {t("password")}
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="••••••••"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                      className="bg-gray-900/50 border-gray-700 text-white placeholder-gray-500 pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-200"
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-semibold rounded-xl shadow-lg shadow-purple-900/40"
+                >
+                  {t("signIn")}
+                </Button>
+              </form>
+            </TabsContent>
+
+            {/* Signup Form */}
+            <TabsContent value="signup">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <Label htmlFor="name" className="text-gray-300">
+                    {t("fullName")}
+                  </Label>
                   <Input
                     id="name"
                     type="text"
-                    placeholder="Enter your full name"
+                    placeholder={t("johnDoe")}
                     value={formData.name}
-                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="h-11 sm:h-12 pl-9 sm:pl-10 border-little-dipper bg-white/50 focus:border-primary text-sm"
+                    onChange={handleChange}
                     required
-                    autoFocus
+                    className="bg-gray-900/50 border-gray-700 text-white placeholder-gray-500"
                   />
-                  <User className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-buffed-plum" />
                 </div>
-              </div>
-            )}
-            
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-wall-street font-medium text-sm">
-                Email Address
-              </Label>
-              <div className="relative">
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                  className="h-11 sm:h-12 pl-9 sm:pl-10 border-little-dipper bg-white/50 focus:border-primary text-sm"
-                  required
-                  autoFocus={mode === 'login'}
-                />
-                <Mail className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-buffed-plum" />
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-wall-street font-medium text-sm">
-                Password
-              </Label>
-              <div className="relative">
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
-                  value={formData.password}
-                  onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                  className="h-11 sm:h-12 pl-9 sm:pl-10 pr-9 sm:pr-10 border-little-dipper bg-white/50 focus:border-primary text-sm"
-                  required
-                />
-                <Lock className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-buffed-plum" />
+                <div>
+                  <Label htmlFor="email" className="text-gray-300">
+                    {t("email")}
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="bg-gray-900/50 border-gray-700 text-white placeholder-gray-500"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="password" className="text-gray-300">
+                    {t("password")}
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="••••••••"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                      className="bg-gray-900/50 border-gray-700 text-white placeholder-gray-500 pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-200"
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                </div>
                 <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 sm:h-8 sm:w-8 p-0 hover:bg-transparent"
-                  onClick={() => setShowPassword(!showPassword)}
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-semibold rounded-xl shadow-lg shadow-purple-900/40"
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-buffed-plum" />
-                  ) : (
-                    <Eye className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-buffed-plum" />
-                  )}
+                  {t("createAccount")}
                 </Button>
-              </div>
-            </div>
-            
-            <Button
-              type="submit"
-              className="w-full h-11 sm:h-12 gradient-primary shadow-hover hover:shadow-hover transition-all duration-200"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-b-2 border-white" />
-              ) : (
-                mode === 'signup' ? 'Create Account' : 'Sign In'
-              )}
-            </Button>
-          </form>
-          
-          {/* Toggle Mode */}
-          <div className="text-center text-xs sm:text-sm">
-            <span className="text-buffed-plum">
-              {mode === 'signup' ? 'Already have an account?' : "Don't have an account?"}
-            </span>{" "}
-            <Button
-              variant="link"
-              className="p-0 h-auto text-primary hover:text-primary/80"
-              onClick={() => onModeChange(mode === 'signup' ? 'login' : 'signup')}
-            >
-              {mode === 'signup' ? 'Sign in' : 'Sign up'}
-            </Button>
-          </div>
+              </form>
+            </TabsContent>
+          </Tabs>
         </div>
       </DialogContent>
     </Dialog>

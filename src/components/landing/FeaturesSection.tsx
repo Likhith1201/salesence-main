@@ -1,57 +1,59 @@
 import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { 
-  Zap, 
-  TrendingUp, 
-  BarChart3, 
-  Target, 
-  Shield, 
-  Clock,
+import {
+  Zap,
   Brain,
   Rocket,
+  BarChart3,
+  Target,
+  Shield,
+  Clock,
   Users
 } from "lucide-react";
-
-const features = [
-  { 
-    icon: Brain, 
-    title: "AI-Powered Analysis", 
-    description: "Advanced machine learning algorithms analyze your products and provide actionable insights to boost sales and conversions.",
-    gradient: "from-purple-500 to-indigo-500"
-  },
-  { 
-    icon: Rocket, 
-    title: "Instant Optimization", 
-    description: "Get real-time suggestions for titles, descriptions, pricing, and images that drive results within minutes.",
-    gradient: "from-indigo-500 to-blue-500"
-  },
-  { 
-    icon: BarChart3, 
-    title: "Performance Tracking", 
-    description: "Monitor your improvements with detailed analytics and track which optimizations deliver the best ROI.",
-    gradient: "from-blue-500 to-cyan-500"
-  },
-  { 
-    icon: Target, 
-    title: "Multi-Platform Support", 
-    description: "Works seamlessly with Amazon, eBay, Etsy, Shopify, and other major marketplaces from a single dashboard.",
-    gradient: "from-cyan-500 to-teal-500"
-  },
-  { 
-    icon: Shield, 
-    title: "Enterprise Security", 
-    description: "Your data is encrypted and secure. We never share your information with competitors or third parties.",
-    gradient: "from-teal-500 to-green-500"
-  },
-  { 
-    icon: Clock, 
-    title: "Time-Saving Automation", 
-    description: "Automate hours of manual research and optimization work. Focus on growing your business, not tedious tasks.",
-    gradient: "from-green-500 to-emerald-500"
-  }
-];
+import { useTranslation } from "react-i18next";
 
 export const FeaturesSection = () => {
+  const { t } = useTranslation();
+
+  const features = [
+    {
+      icon: Brain,
+      title: t("aiPoweredAnalysisTitle"),
+      description: t("aiPoweredAnalysisDesc"),
+      gradient: "from-purple-500 to-indigo-500"
+    },
+    {
+      icon: Rocket,
+      title: t("instantOptimizationTitle"),
+      description: t("instantOptimizationDesc"),
+      gradient: "from-indigo-500 to-blue-500"
+    },
+    {
+      icon: BarChart3,
+      title: t("performanceTrackingTitle"),
+      description: t("performanceTrackingDesc"),
+      gradient: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: Target,
+      title: t("multiPlatformTitle"),
+      description: t("multiPlatformDesc"),
+      gradient: "from-cyan-500 to-teal-500"
+    },
+    {
+      icon: Shield,
+      title: t("enterpriseSecurityTitle"),
+      description: t("enterpriseSecurityDesc"),
+      gradient: "from-teal-500 to-green-500"
+    },
+    {
+      icon: Clock,
+      title: t("timeSavingTitle"),
+      description: t("timeSavingDesc"),
+      gradient: "from-green-500 to-emerald-500"
+    }
+  ];
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
 
@@ -87,18 +89,19 @@ export const FeaturesSection = () => {
         <div className="text-center mb-20">
           <div className="inline-flex items-center glass-effect rounded-full px-6 py-3 mb-6">
             <Zap className="w-5 h-5 text-purple-400 mr-2" />
-            <span className="text-sm font-medium text-gray-300">Powerful Features</span>
+            <span className="text-sm font-medium text-gray-300">{t("powerfulFeatures")}</span>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Everything you need to
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+            {t("everythingYouNeed")}
             <br />
-            <span className="text-gradient">dominate your market</span>
+            <span className="text-indigo-400 block tracking-tight drop-shadow-lg">
+              {t("dominateYourMarket")}
+            </span>
           </h2>
           
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Professional-grade analysis tools powered by cutting-edge AI to help you compete 
-            with top sellers in any marketplace.
+            {t("professionalGradeAnalysis")}
           </p>
         </div>
 
@@ -123,7 +126,7 @@ export const FeaturesSection = () => {
                   <div className={`p-3 rounded-xl bg-gradient-to-r ${feature.gradient} group-hover:scale-110 transition-transform duration-300`}>
                     <feature.icon className="w-6 h-6 text-white" />
                   </div>
-                  <CardTitle className="text-xl font-bold text-white group-hover:text-gradient transition-colors duration-300">
+                  <CardTitle className="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors duration-300">
                     {feature.title}
                   </CardTitle>
                 </div>
@@ -146,15 +149,15 @@ export const FeaturesSection = () => {
           <div className="glass-effect rounded-2xl p-8 max-w-2xl mx-auto">
             <Users className="w-12 h-12 text-purple-400 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-white mb-4">
-              Join 10,000+ successful sellers
+              {t("joinSuccessfulSellers")}
             </h3>
             <p className="text-gray-300 mb-6">
-              Start optimizing your listings today and see results within hours.
+              {t("startOptimizingToday")}
             </p>
             <div className="flex items-center justify-center space-x-4 text-sm text-gray-400">
-              <span>✓ No credit card required</span>
-              <span>✓ 5 free analyses</span>
-              <span>✓ Cancel anytime</span>
+              <span>{t("noCreditCardRequired")}</span>
+              <span>{t("freeAnalyses")}</span>
+              <span>{t("cancelAnytime")}</span>
             </div>
           </div>
         </div>
