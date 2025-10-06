@@ -26,11 +26,7 @@ const TrendingUp = ({ className = 'w-6 h-6' }) => (
 const BookOpen = ({ className = 'w-6 h-6' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-<<<<<<< HEAD
         <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-=======
-        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"></path>
->>>>>>> 6a73908 (project completed)
     </svg>
 );
 const ChevronDown = ({ className = 'w-6 h-6' }) => (
@@ -65,15 +61,6 @@ const HeartHandshake = ({ className = 'w-6 h-6' }) => (
         <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.82 2.94 0l.06-.06L12 11l.96-.96.06.06c.8.8 2.12.8 2.94 0v0a2.17 2.17 0 0 0 0-3.08L12 5Z"></path>
     </svg>
 );
-<<<<<<< HEAD
-=======
-const Moon = ({ className = 'w-6 h-6' }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
-);
-const Sun = ({ className = 'w-6 h-6' }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
-);
->>>>>>> 6a73908 (project completed)
 const X = ({ className = 'w-6 h-6' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
 );
@@ -93,11 +80,7 @@ const Star = ({ className = 'w-6 h-6' }) => (
 );
 const Heart = ({ className = 'w-6 h-6' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-<<<<<<< HEAD
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-=======
-        <path d="M20.84 4.61a5.5 极狐 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
->>>>>>> 6a73908 (project completed)
     </svg>
 );
 const Zap = ({ className = 'w-6 h-6' }) => (
@@ -126,7 +109,6 @@ const Search = ({ className = 'w-6 h-6' }) => (
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
     </svg>
 );
-<<<<<<< HEAD
 const Rocket = ({ className = 'w-6 h-6' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
         <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
@@ -193,8 +175,6 @@ const Play = ({ className = 'w-6 h-6' }) => (
     <polygon points="6 3 20 12 6 21 6 3"></polygon>
   </svg>
 );
-=======
->>>>>>> 6a73908 (project completed)
 
 // Function to get translated job openings
 const getJobOpenings = (t: any) => [
@@ -219,7 +199,6 @@ const getJobOpenings = (t: any) => [
         postedDate: t('jobPosted1Week'),
     },
     {
-<<<<<<< HEAD
         title: t('jobTitleMarketingIntern'),
         location: t('jobLocationRemote'),
         department: t('jobDepartmentMarketing'),
@@ -228,30 +207,6 @@ const getJobOpenings = (t: any) => [
         requirements: [t('jobInternReq1'), t('jobInternReq2'), t('jobInternReq3')],
         experience: t('jobInternExp'),
         postedDate: t('jobPosted3Days'),
-=======
-        title: 'Marketing Intern',
-        location: 'Remote', department: 'Marketing', type: 'Internship',
-        responsibilities: ['Assist with social media management and content creation.', 'Help organize and promote marketing events.', 'Conduct market research.'],
-        requirements: ['Currently pursuing or recently graduated with a relevant degree.', 'Strong written and verbal communication skills.', 'A proactive and eager-to-learn attitude.'],
-        experience: 'Student/Entry-level',
-        postedDate: '3 days ago',
-    },
-    {
-        title: 'Backend Engineer (Node.js)',
-        location: 'Remote', department: 'Engineering', type: 'Full-time',
-        responsibilities: ['Design and implement scalable backend services.', 'Work with databases like PostgreSQL and MongoDB.', 'Build and maintain APIs.'],
-        requirements: ['4+ years of experience with Node.js.', 'Experience with cloud platforms like AWS or GCP.', 'Strong understanding of RESTful API design.'],
-        experience: '4+ years',
-        postedDate: '5 days ago',
-    },
-    {
-        title: 'Content Strategist',
-        location: 'Remote', department: 'Marketing', type: 'Full-time',
-        responsibilities: ['Develop and execute a comprehensive content strategy.', 'Create engaging blog posts, whitepapers, and case studies.', 'Manage the editorial calendar.'],
-        requirements: ['3+ years of experience in content marketing.', 'Exceptional writing and editing skills.', 'Deep understanding of SEO best practices.'],
-        experience: '3+ years',
-        postedDate: '2 weeks ago',
->>>>>>> 6a73908 (project completed)
     }
 ];
 
@@ -266,30 +221,19 @@ const getTestimonials = (t: any) => [
     {
         name: 'Mehmet Demir',
         role: 'Product Designer',
-<<<<<<< HEAD
         quote: t('testimonialMehmetQuote'),
         avatar: 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-=======
-        quote: 'The work-life balance is perfect, and the projects are challenging and rewarding.',
-        avatar: 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
->>>>>>> 6a73908 (project completed)
         rating: 5
     },
     {
         name: 'Zeynep Kaya',
         role: 'Marketing Lead',
-<<<<<<< HEAD
         quote: t('testimonialZeynepQuote'),
         avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-=======
-        quote: 'I love how the company invests in our professional development and growth.',
-        avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQ极狐jEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
->>>>>>> 6a73908 (project completed)
         rating: 5
     }
 ];
 
-<<<<<<< HEAD
 // Enhanced culture data with translation support
 const getCultureGallery = (t: any) => [
     {
@@ -358,8 +302,6 @@ const companyValues = [
 
 // Team activities are now defined inline with translation keys
 
-=======
->>>>>>> 6a73908 (project completed)
 type JobOpening = typeof jobOpenings[0];
 
 // Video Modal Component
@@ -709,11 +651,7 @@ export default function CareersPage() {
                                job.department.toLowerCase().includes(searchTerm.toLowerCase());
             return departmentMatch && typeMatch && searchMatch;
         });
-<<<<<<< HEAD
     }, [filters, searchTerm, jobOpenings]);
-=======
-    }, [filters, searchTerm]);
->>>>>>> 6a73908 (project completed)
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 text-gray-200 font-sans antialiased transition-colors duration-300 relative overflow-hidden">
@@ -733,14 +671,10 @@ export default function CareersPage() {
             
             {/* Salesence Logo */}
             <div className="fixed top-6 right-6 z-50">
-<<<<<<< HEAD
                 <div className="font-bold text-2xl text-cyan-400 flex items-center backdrop-blur-md bg-black/20 px-4 py-2 rounded-lg">
                     <Rocket className="w-8 h-8 mr-2" />
                     Salesence
                 </div>
-=======
-                <div className="font-bold text-2xl text-cyan-400">Salesence</div>
->>>>>>> 6a73908 (project completed)
             </div>
             
             <main className="relative z-10">
@@ -752,12 +686,9 @@ export default function CareersPage() {
                     ></div>
                     
                     <div className="relative z-10 max-w-4xl mx-auto">
-<<<<<<< HEAD
                         <div className="inline-block mb-6 bg-cyan-500/20 px-4 py-2 rounded-full border border-cyan-500/30 backdrop-blur-md">
                             <span className="text-cyan-300 text-sm font-medium">{t('careersHeroBadge')}</span>
                         </div>
-=======
->>>>>>> 6a73908 (project completed)
                         <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-white animate-fade-in">
                             {t('careersHeroTitle')}
                         </h1>
@@ -765,7 +696,6 @@ export default function CareersPage() {
                             {t('careersHeroSubtitle')}
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-<<<<<<< HEAD
                             <a href="#openings" className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center backdrop-blur-md">
                                 {t('careersExploreBtn')}
                                 <ChevronDown className="w-5 h-5 ml-2" />
@@ -773,39 +703,22 @@ export default function CareersPage() {
                             <a href="#culture" className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-white/10 transition-all duration-300 transform hover:scale-105 flex items-center backdrop-blur-md">
                                 {t('careersCultureBtn')}
                                 <Heart className="w-5 h-5 ml-2" />
-=======
-                            <a href="#openings" className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                                Explore Open Positions
-                            </a>
-                            <a href="#culture" className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
-                                Our Culture
->>>>>>> 6a73908 (project completed)
                             </a>
                         </div>
                     </div>
                     
                     <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-<<<<<<< HEAD
                         <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center backdrop-blur-md">
                             <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
-=======
-                        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-                            <div className="w-1极狐 h-3 bg-white rounded-full mt-2"></div>
->>>>>>> 6a73908 (project completed)
                         </div>
                     </div>
                 </section>
 
                 {/* Stats Section */}
-<<<<<<< HEAD
                 <section className="py-16 bg-gradient-to-b from-indigo-900/50 to-purple-900/50 relative overflow-hidden">
                     <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center bg-no-repeat opacity-10"></div>
                     <div className="max-w-6xl mx-auto px-4 relative z-10">
                         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">{t('careersStatsTitle')}</h2>
-=======
-                <section className="py-16 bg-gradient-to-b from-indigo-900/50 to-purple-900/50">
-                    <div className="max-w-6xl mx-auto px-4">
->>>>>>> 6a73908 (project completed)
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                             <StatCard number={stats.employees} label={t('careersTeamMembers')} icon={<Users className="w-8 h-8 text-cyan-400" />} />
                             <StatCard number={stats.countries} label={t('careersCountries')} icon={<Globe className="w-8 h-8 text-cyan-400" />} />
@@ -815,12 +728,9 @@ export default function CareersPage() {
                     </div>
                 </section>
 
-<<<<<<< HEAD
                 {/* Enhanced Life at Salesence Section */}
                 <LifeAtSalesenceSection />
 
-=======
->>>>>>> 6a73908 (project completed)
                 {/* Culture Section */}
                 <section id="culture" className="py-20 px-4 bg-gradient-to-br from-gray-900 to-indigo-900">
                     <div className="max-w-6xl mx-auto text-center">
@@ -837,7 +747,7 @@ export default function CareersPage() {
                 
                 {/* Work Environment Section */}
                 <section className="py-20 px-4 bg-gradient-to-br from-indigo-900 to-purple-900">
-                    <div className="极狐-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+                    <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
                         <div className="pr-8">
                             <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('careersEnvironmentTitle')}</h2>
                             <p className="text-gray-300 mb-4 text-lg">{t('careersEnvironmentSubtitle')}</p>
@@ -938,21 +848,12 @@ export default function CareersPage() {
                 {/* Hiring For Section */}
                 <section className="py-20 px-4 bg-gradient-to-br from-purple-900 to-indigo-900">
                     <div className="max-w-5xl mx-auto text-center">
-<<<<<<< HEAD
                         <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('careersHiringTitle')}</h2>
                         <p className="text-gray-300 max-w-3xl mx-auto mb-12">{t('careersHiringSubtitle')}</p>
                         <div className="grid md:grid-cols-3 gap-8">
                             <HiringCard title={t('careersExpertsTitle')} description={t('careersExpertsDesc')} />
                             <HiringCard title={t('careersFreshersTitle')} description={t('careersFreshersDesc')} />
                             <HiringCard title={t('careersInternsTitle')} description={t('careersInternsDesc')} />
-=======
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">Who We're Looking For</h2>
-                        <p className="text-gray-300 max-w-3xl mx-auto mb-12">We believe diverse teams build better products. We're looking for talented individuals from all backgrounds and experience levels.</p>
-                        <div className="grid md:grid-cols-3 gap-8">
-                            <HiringCard title="Seasoned Experts" description="We value the deep knowledge and mentorship that experienced professionals bring to our team." />
-                            <HiringCard title="Ambitious Freshers" description="We're excited to help kickstart your career. We look for potential, passion, and a willingness to learn." />
-                            <HiringCard title="Eager Interns" description="Our internship program offers hands-on experience and a chance to make a real impact." />
->>>>>>> 6a73908 (project completed)
                         </div>
                     </div>
                 </section>
@@ -990,7 +891,6 @@ export default function CareersPage() {
                 </section>
             </main>
 
-<<<<<<< HEAD
             {/* Enhanced Footer */}
             <footer className="bg-gradient-to-b from-gray-900 to-black text-white py-16 px-4 border-t border-gray-800 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-5"></div>
@@ -1039,40 +939,6 @@ export default function CareersPage() {
                                 <p className="flex items-center"><svg className="w-5 h-5 mr-3 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>+1 (555) 123-4567</p>
                                 <p className="flex items-center"><MapPin className="w-5 h-5 mr-3 text-cyan-400" />{t('careersRemoteFirst')}</p>
                             </div>
-=======
-            <footer className="bg-gray-900 text-white py-12 px-4 border-t border-gray-800">
-                <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
-                    <div>
-                        <h3 className="text-xl font-bold mb-4">Salesence</h3>
-                        <p className="text-gray-400">Building the future together with innovative solutions and a passionate team.</p>
-                    </div>
-                    <div>
-                        <h3 className="text-lg font-semib极狐 mb-4">Quick Links</h3>
-                        <ul className="space-y-2 text-gray-400">
-                            <li><Link to="/" className="hover:text-cyan-400 transition-colors">Home</Link></li>
-                            <li><a href="#culture" className="hover:text-cyan-400 transition-colors">About</a></li>
-                            <li><a href="#openings" className="hover:text-cyan-400 transition-colors">Careers</a></li>
-                            <li><Link to="/contact" className="hover:text-cyan-400 transition-colors">Contact</Link></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 className="text-lg font-semibold mb-4">Open Positions</h3>
-                        <ul className="space-y-2 text-gray-400">
-                            <li><a href="#openings" className="hover:text-cyan-400 transition-colors">Engineering</a></li>
-                            <li><a href="#openings" className="hover:text-cyan-400 transition-colors">Design</a></li>
-                            <li><a href="#openings" className="hover:text-cyan-400 transition-colors">Marketing</a></li>
-                            <li><a href="#openings" className="hover:text-cyan-400 transition-colors">Internships</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-                        <p className="text-gray-400">careers@salesence.com</p>
-                        <p className="text-gray-400">+1 (555) 123-4567</p>
-                        <div className="flex space-x-4 mt-4">
-                            <a href="#" className="text-gray-400 hover:text-cyan-400 transition-colors">LinkedIn</a>
-                            <a href="#" className="text-gray-400 hover:text-cyan-400 transition-colors">Twitter</a>
-                            <a href="#" className="text-gray-400 hover:text-cyan-400 transition-colors">Instagram</a>
->>>>>>> 6a73908 (project completed)
                         </div>
                     </div>
                     <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
@@ -1080,7 +946,6 @@ export default function CareersPage() {
                     </div>
                 </div>
             </footer>
-<<<<<<< HEAD
 
             {/* Custom CSS for animations */}
             <style>{`
@@ -1090,17 +955,15 @@ export default function CareersPage() {
                     to { opacity: 1; transform: translateY(0); }
                 }
             `}</style>
-=======
->>>>>>> 6a73908 (project completed)
         </div>
     );
 }
 
 // Helper Components
 const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => (
-    <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-700">
-        <div className="mb-4 inline-block bg-cyan-900/30 p-3 rounded-full">{icon}</div>
-        <h3 className="text-xl font-bold mb-2">{title}</h3>
+    <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 group">
+        <div className="mb-4 inline-block bg-cyan-900/30 p-3 rounded-full group-hover:scale-110 transition-transform duration-300">{icon}</div>
+        <h3 className="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">{title}</h3>
         <p className="text-gray-400">{description}</p>
     </div>
 );
@@ -1109,7 +972,7 @@ const JobCard = ({ job, isOpen, onToggle, onApply }: { job: JobOpening, isOpen: 
     const { t } = useTranslation();
     return (
     <div className="bg-gray-800/50 backdrop-blur-md rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-700">
-        <button onClick={onToggle} className="w-full text-left p-6 flex justify-between items-center">
+        <button onClick={onToggle} className="w-full text-left p-6 flex justify-between items-center hover:bg-gray-700/30 transition-colors">
             <div className="flex-grow">
                 <div className="flex items-start justify-between">
                     <div>
@@ -1162,23 +1025,23 @@ const JobCard = ({ job, isOpen, onToggle, onApply }: { job: JobOpening, isOpen: 
 };
 
 const HiringCard = ({ title, description }: { title: string, description: string }) => (
-    <div className="bg-gray-800/50 backdrop-blur-md p-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-700">
-        <h3 className="text-2xl font-bold mb-3 text-cyan-400">{title}</h3>
+    <div className="bg-gray-800/50 backdrop-blur-md p-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 group">
+        <h3 className="text-2xl font-bold mb-3 text-cyan-400 group-hover:scale-105 transition-transform">{title}</h3>
         <p className="text-gray-400">{description}</p>
     </div>
 );
 
 const Perk = ({ icon, text }: { icon: React.ReactNode, text: string }) => (
-    <div className="flex flex-col items-center text-center">
-        <div className="bg-cyan-900/30 p-4 rounded-full mb-3 text-cyan-400">
+    <div className="flex flex-col items-center text-center group">
+        <div className="bg-cyan-900/30 p-4 rounded-full mb-3 text-cyan-400 group-hover:scale-110 group-hover:bg-cyan-900/40 transition-all duration-300">
             {React.cloneElement(icon as React.ReactElement, { className: 'w-8 h-8' })}
         </div>
-        <p className="font-semibold text-gray-300 text-sm">{text}</p>
+        <p className="font-semibold text-gray-300 text-sm group-hover:text-cyan-300 transition-colors">{text}</p>
     </div>
 );
 
 const StatCard = ({ number, label, icon, suffix = '' }: { number: number, label: string, icon: React.ReactNode, suffix?: string }) => (
-    <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-lg shadow-md text-center border border-gray-700">
+    <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-lg shadow-md text-center border border-gray-700 hover:scale-105 transition-transform duration-300">
         <div className="flex justify-center mb-3">{icon}</div>
         <div className="text-4xl font-bold text-cyan-400 mb-2">{number}{suffix}</div>
         <div className="text-gray-400">{label}</div>
@@ -1186,7 +1049,7 @@ const StatCard = ({ number, label, icon, suffix = '' }: { number: number, label:
 );
 
 const TestimonialCard = ({ testimonial }: { testimonial: any }) => (
-    <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-lg shadow-md border border-gray-700">
+    <div className="bg-gray-800/50 backdrop-blur-md p-6 rounded-lg shadow-md border border-gray-700 hover:scale-105 transition-transform duration-300">
         <div className="flex items-center mb-4">
             <img src={testimonial.avatar} alt={testimonial.name} className="w-12 h-12 rounded-full" />
             <div className="ml-4">
@@ -1285,7 +1148,6 @@ const ApplicationForm = ({ onSubmit }: { onSubmit: () => void }) => {
                     {urlErrors.linkedin && <p className="mt-1 text-sm text-red-400">{t('careersValidUrlError')}</p>}
                 </div>
                 <div>
-<<<<<<< HEAD
                     <label htmlFor="portfolio" className="block text-sm font-medium text-gray-300">{t('careersPortfolio')}</label>
                     <input
                         type="url"
@@ -1295,10 +1157,6 @@ const ApplicationForm = ({ onSubmit }: { onSubmit: () => void }) => {
                         className={`mt-1 block w-full px-3 py-2 bg-gray-700 border rounded-md shadow-sm text-white focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${urlErrors.portfolio ? 'border-red-500' : 'border-gray-600'}`}
                     />
                     {urlErrors.portfolio && <p className="mt-1 text-sm text-red-400">{t('careersValidUrlError')}</p>}
-=======
-                    <label htmlFor="portfolio" className="block text-sm font-medium text-gray-300">Portfolio/GitHub URL</label>
-                    <input type="url" name="portfolio" id="portfolio" className="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-cyan-500 focus:border-cyan-500" />
->>>>>>> 6a73908 (project completed)
                 </div>
             </div>
             <div>
@@ -1329,7 +1187,7 @@ const ToastNotification = ({ notification, onClose }: { notification: { show: bo
                         <p className="text-sm font-bold text-white">{notification.title}</p>
                         <p className="mt-1 text-sm text-gray-300">{notification.message}</p>
                     </div>
-                    <div className="ml-4 flex-shrink极狐 flex">
+                    <div className="ml-4 flex-shrink-0 flex">
                         <button onClick={onClose} className="rounded-md inline-flex text-gray-400 hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
                             <X className="h-5 w-5" />
                         </button> 
