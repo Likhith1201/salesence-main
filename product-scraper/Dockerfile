@@ -1,5 +1,5 @@
 # Use a Node image that has the necessary Playwright system dependencies
-FROM mcr.microsoft.com/playwright/node:20-slim
+FROM mcr.microsoft.com/playwright/node:20
 
 # Set the working directory
 WORKDIR /app/product-scraper
